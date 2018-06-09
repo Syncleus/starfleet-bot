@@ -13,13 +13,13 @@ This bot listens on the Federated Timeline and follows everyone.
 This bot respect the #nobot tag.
 
 If you don't want to be followed by the bot anymore, 
-just DM "unfollow" to the bot, and it'll never follow you again. [WIP]
+just DM "unfollow" to the bot, and it'll never follow you again.
 
 |Command|What is does|
 |---|---|
-|unfollow|[WIP] The bot will unfollow and mure you so it'll never follow you again.|
-|blockuser <user@domain.tld>|[WIP] The bot will mute the targeted user. If followed, it'll unfollow they too. Admin only.|
-|blockdomain <domain.tld>|[WIP] The bot will mute the targeted domain. If users from this domain are followed, it'll unfollow them. Admin only.|
+|unfollow|The bot will unfollow and mure you so it'll never follow you again.|
+|blockuser <user@domain.tld>|The bot will mute the targeted user. If followed, it'll unfollow they too. Admin only.|
+|blockdomain <domain.tld>|The bot will mute the targeted domain. If users from this domain are followed, it'll unfollow them. Admin only.|
 
 ## Running the bot
 
