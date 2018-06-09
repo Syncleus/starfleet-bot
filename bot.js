@@ -110,6 +110,13 @@ class Bot extends EventEmitter {
     follow(id) {
         this.M.post('accounts/' + id + '/follow');
     }
-}
+    /**
+     * Mute an user
+     * @param {int} id
+     */
+    mute_user(id) {
+        this.M.post('accounts/' + id + '/mute');
+    }
 
+}
 module.exports = Bot;

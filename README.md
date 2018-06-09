@@ -10,7 +10,7 @@ This is a Federation Bot working with the Mastodon API.
 
 This bot listens on the Federated Timeline and follows everyone.
 
-This bot respect the #nobot tag. [WIP]
+This bot respect the #nobot tag.
 
 If you don't want to be followed by the bot anymore, 
 just DM "unfollow" to the bot, and it'll never follow you again. [WIP]

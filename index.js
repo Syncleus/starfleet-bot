@@ -1,4 +1,5 @@
 const Bot = require("./bot");
+const striptags = require('striptags');
 const config = require('./config.json');
 
 const client = new Bot(config, [{api_point: "public", events: ["update"]},
@@ -33,7 +34,11 @@ client.on('update', (msg) => {
         }
     }
 
-    //Todo: Implement #nobot detection
+    // Respect #nobot
+    if (striptags(msg.account.note).match(/#nobot/i)) {
+        client.mute_user(id);
+        console.log("MUTED #nobot: " + acct);
+    }
 
     following.push(acct);
     client.follow(id);
