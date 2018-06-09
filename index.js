@@ -17,6 +17,7 @@ client.start().then(() => {
 
 client.on('update', (msg) => {
     const acct = msg.account.acct;
+    const id = parseInt(msg.account.id);
     const acct_parts = acct.split('@');
 
     if (acct_parts.length === 1) {
@@ -35,7 +36,7 @@ client.on('update', (msg) => {
     //Todo: Implement #nobot detection
 
     following.push(acct);
-    client.follow(acct);
+    client.follow(id);
     console.log("NOW FOLLOWS: " + acct);
 });
 

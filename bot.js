@@ -1,7 +1,7 @@
 const EventEmitter = require('events');
 const MastodonAPI = require('mastodon-api');
 
-// Todo: Implements block_user and block_domain
+// Todo: Implements mute_user and block_domain
 // Todo: Implements unfollow
 
 class Bot extends EventEmitter {
@@ -105,12 +105,10 @@ class Bot extends EventEmitter {
 
     /**
      * Follow a user
-     * @param {string} acct
+     * @param {int} id
      */
-    follow(acct) {
-        this.M.post('follows', {
-            uri: acct
-        });
+    follow(id) {
+        this.M.post('accounts/' + id + '/follow');
     }
 }
 
