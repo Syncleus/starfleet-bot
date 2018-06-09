@@ -15,7 +15,7 @@ class Bot extends EventEmitter {
         this.access_token = access_token;
         this.to_listen = to_listen;
 
-        this.listeners = [];
+        this.listeners = new WeakMap();
     }
 
     /**
@@ -28,9 +28,9 @@ class Bot extends EventEmitter {
         });
 
         for(const listen of this.to_listen) {
-            this.listeners[listen] = this.M.stream('streaming/' + listen.api_point);
+            this.listeners.set(listen, this.M.stream('streaming/' + listen.api_point));
 
-            this.listeners[listen].on('message', (msg) => {
+            this.listeners.get(listen).on('message', (msg) => {
                 for(const event of listen.events) {
                     if (msg.event === event) {
                         this.emit(msg.event, msg.data)
@@ -39,7 +39,7 @@ class Bot extends EventEmitter {
             })
         }
 
-        this.me = (await this.M.get('accounts/verify_credentials')).data;
+        this.me = (await this.verify_credentials());
     }
 
     /**
@@ -55,9 +55,7 @@ class Bot extends EventEmitter {
      * @returns {Array}
      */
     async following_list() {
-        const following_list = await this.M.get('accounts/' + this.me.id + '/following');
-
-        return following_list.data;
+        return (await this.M.get('accounts/' + this.me.id + '/following')).data;
     }
 
     /**
@@ -65,13 +63,11 @@ class Bot extends EventEmitter {
      * @returns {Array}
      */
     async followers_list() {
-        const followers_list = await this.M.get('accounts/' + this.me.id + '/followers');
-
-        return followers_list.data;
+        return (await this.M.get('accounts/' + this.me.id + '/followers')).data;
     }
 
     async verify_credentials() {
-        return await this.M.get('accounts/verify_credentials');
+        return (await this.M.get('accounts/verify_credentials')).data;
     }
 
     /**
