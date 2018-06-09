@@ -39,17 +39,22 @@ client.on('update', (msg) => {
         return;
     }
 
-    // This will be... not optimal I think.
-    if (following.has(acct)) {
-        console.log('ALREADY FOLLOWS: ' + acct);
+    // Don't follow locked accounts
+    if(msg.account.locked === true) {
+        console.log("LOCKED: " + acct);
         return;
     }
-
 
     // Respect #nobot
     if (striptags(msg.account.note).match(/#nobot/i)) {
         client.mute_user(id);
         console.log("MUTED #nobot: " + acct);
+    }
+
+    // This will be... not optimal I think.
+    if (following.has(acct)) {
+        console.log('ALREADY FOLLOWS: ' + acct);
+        return;
     }
 
     following.add(acct);
