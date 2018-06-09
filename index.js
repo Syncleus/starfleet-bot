@@ -1,8 +1,8 @@
 const Bot = require("./bot");
 const config = require('./config.json');
 
-const client = new Bot(config, {to_listen: [{api_point: "public", events: ["update"]},
-                                            {api_point: "user", events: ["notification"]}]});
+const client = new Bot(config, [{api_point: "public", events: ["update"]},
+                                {api_point: "user", events: ["notification"]}]);
 
 // Following list
 const following = [];

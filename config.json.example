@@ -1,15 +1,4 @@
 {
   "access_token": "",
-  "api_url": "https://botsin.space/api/v1/",
-
-  "listeners": [
-    {
-      "api_point": "public",
-      "events": ["update"]
-    },
-    {
-      "api_point": "user",
-      "events": ["notification"]
-    }
-  ]
+  "api_url": "https://botsin.space/api/v1/"
 }

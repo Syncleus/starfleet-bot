@@ -16,7 +16,7 @@ class Bot extends EventEmitter {
 
         this.api_url = api_url || 'https://botsin.space/api/v1/';
         this.access_token = access_token;
-        this.to_listen = to_listen || ['public'];
+        this.to_listen = to_listen;
 
         this.listeners = [];
     }

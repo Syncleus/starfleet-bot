@@ -33,6 +33,6 @@ vi config.json
 
 Edit the `access_token` and the `api_url` to correspond your instance.
 
-```
+```bash
 node index.js
 ```
