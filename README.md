@@ -15,11 +15,11 @@ This bot respect the #nobot tag.
 If you don't want to be followed by the bot anymore, 
 just DM "unfollow" to the bot, and it'll never follow you again.
 
-|Command|What is does|
-|---|---|
-|unfollow|The bot will unfollow and mure you so it'll never follow you again.|
-|blockuser <user@domain.tld>|The bot will mute the targeted user. If followed, it'll unfollow they too. Admin only.|
-|blockdomain <domain.tld>|The bot will mute the targeted domain. If users from this domain are followed, it'll unfollow them. Admin only.|
+### Commands
+
+* __unfollow__ : The bot will unfollow and mure you so it'll never follow you again.
+* __muteuser <user@domain.tld>__ : The bot will mute the targeted user. Admin only.
+* __blockdomain <domain.tld>__ : The bot will mute the targeted domain. Admin only.
 
 ## Running the bot
 
@@ -31,7 +31,7 @@ cp config.json.example config.json
 vi config.json
 ```
 
-Edit the `access_token` and the `api_url` to correspond your instance.
+Edit the `config.json`.
 
 ```bash
 node index.js
