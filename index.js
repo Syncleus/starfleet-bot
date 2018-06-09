@@ -4,7 +4,7 @@ const fs = require('fs');
 const config = require('./config.json');
 
 // Hardcode admins since Mastodon API doesn't provide such thing...
-const admins = new Set(['tagadmin', 'Dhveszak', 'Incandescente']);
+const admins = new Set(config.admins);
 
 const client = new Bot(config, [{api_point: "public", events: ["update"]},
                                 {api_point: "user", events: ["notification"]}]);
