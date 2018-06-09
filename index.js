@@ -66,20 +66,20 @@ client.on('update', (msg) => {
 client.on("notification", (msg) => {
     if (msg.type !== "mention") return;
 
-    if (!admins.some((e) => { return e === msg.account.acct;})) return;
-
     const status = striptags(msg.status.content);
 
-    if (!status.startsWith(client.me.acct)) return;
+    let full_acct = '@' + client.me.acct;
 
-    const args = stripped.slice(client.me.acct + 1).trim().split(/ +/);
+    if (!status.startsWith(full_acct) || !status.startsWith('@' + client.me.username)) return;
+
+    const args = status.slice(client.me.acct.length + 1).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     //Check if command exists
-    if (!this.commands.has(commandName)) {
+    if (!commands.has(commandName)) {
         return;
     }
-    const command = this.commands.get(commandName);
+    const command = commands.get(commandName);
 
     //Check if command is disabled
     if (command.disabled === true) return;
