@@ -26,6 +26,8 @@ client.start().then(() => {
             following.add(account.acct)
         }
     });
+
+    console.log("Federation Bot started ! 🎉")
 });
 
 // When a toot arrives in Federated Timeline
@@ -102,4 +104,9 @@ client.on("notification", (msg) => {
     catch (error) {
         console.error(error);
     }
+});
+
+process.on('SIGINT', () => {
+    console.info("Exiting...");
+    process.exit();
 });
