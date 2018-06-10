@@ -49,6 +49,7 @@ client.on('update', (msg) => {
     if (striptags(msg.account.note).match(/#nobot/i)) {
         client.mute_user(id);
         console.log("MUTED #nobot: " + acct);
+        return;
     }
 
     // This will be... not optimal I think.
