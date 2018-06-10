@@ -33,8 +33,8 @@ node index.js
 
 ### Commands
 
-|Command|What is does| 
-|---|---| 
+|Command|What is does|
+|-----|------| 
 |unfollow|The bot will unfollow and mure you so it'll never follow you again.| 
 |blockuser <user@domain.tld>|The bot will mute the targeted user. If followed, it'll unfollow they too. Admin only.| 
 |blockdomain <domain.tld>|The bot will mute the targeted domain. If users from this domain are followed, it'll unfollow them. Admin only.| 
