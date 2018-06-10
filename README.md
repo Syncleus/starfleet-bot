@@ -18,8 +18,8 @@ just DM "unfollow" to the bot, and it'll never follow you again.
 ## Commands
 
 * __unfollow__ : The bot will unfollow and mure you so it'll never follow you again.
-* __muteuser <user@domain.tld>__ : The bot will mute the targeted user. Admin only.
-* __blockdomain <domain.tld>__ : The bot will mute the targeted domain. Admin only.
+* __muteuser user@domain.tld__ : The bot will mute the targeted user. Admin only.
+* __blockdomain domain.tld__ : The bot will mute the targeted domain. Admin only.
 
 ## Running the bot
 
