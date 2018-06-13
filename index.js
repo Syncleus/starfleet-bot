@@ -25,6 +25,8 @@ client.start().then(() => {
         for(const account of result) {
             following.add(account.acct)
         }
+
+        console.log(`I'm currently following ${following.size} accounts.`)
     });
 
     console.log("Federation Bot started ! 🎉")

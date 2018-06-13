@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const MastodonAPI = require('mastodon-api');
+const wurl = require('wurl');
 
 class Bot extends EventEmitter {
     /**
@@ -42,12 +43,8 @@ class Bot extends EventEmitter {
         this.me = (await this.verify_credentials());
     }
 
-    /**
-     * Fav an existing toot
-     * @param {int} id
-     */
-    fav(id) {
-        this.M.post('statuses/' + id + '/favourite');
+    async verify_credentials() {
+        return (await this.M.get('accounts/verify_credentials')).data;
     }
 
     /**
@@ -55,7 +52,26 @@ class Bot extends EventEmitter {
      * @returns {Array}
      */
     async following_list() {
-        return (await this.M.get('accounts/' + this.me.id + '/following')).data;
+        let result = [];
+        let next_id = 0;
+
+        for (let i = 0; true; i++) {
+            let test;
+
+            if (next_id === 0) {
+                test = await this.M.get('accounts/' + this.me.id + '/following', {limit: 80});
+            } else {
+                test = await this.M.get('accounts/' + this.me.id + '/following', {limit: 80, max_id:next_id});
+            }
+
+            next_id = parseInt(wurl('?max_id' ,test.resp.headers.link.split(",")[0].split(';')[0].slice(1, -1)));
+
+            result = result.concat(test.data);
+
+            if(test.data.length < 80) break;
+        }
+
+        return result;
     }
 
     /**
@@ -63,11 +79,26 @@ class Bot extends EventEmitter {
      * @returns {Array}
      */
     async followers_list() {
-        return (await this.M.get('accounts/' + this.me.id + '/followers')).data;
-    }
+        let result = [];
+        let next_id = 0;
 
-    async verify_credentials() {
-        return (await this.M.get('accounts/verify_credentials')).data;
+        for (let i = 0; true; i++) {
+            let test;
+
+            if (next_id === 0) {
+                test = await client.M.get('accounts/' + client.me.id + '/followers', {limit: 80});
+            } else {
+                test = await client.M.get('accounts/' + client.me.id + '/followers', {limit: 80, max_id:next_id});
+            }
+
+            next_id = parseInt(wurl('?max_id' ,test.resp.headers.link.split(",")[0].split(';')[0].slice(1, -1)));
+
+            result = result.concat(test.data);
+
+            if(test.data.length < 80) break;
+        }
+
+        return result;
     }
 
     /**
@@ -94,6 +125,14 @@ class Bot extends EventEmitter {
         visibility = visibility || data.status.visibility;
 
         this.post(`@${data.account.acct} ${status}`, visibility, data.status.id);
+    }
+
+    /**
+     * Fav an existing toot
+     * @param {int} id
+     */
+    fav(id) {
+        this.M.post('statuses/' + id + '/favourite');
     }
 
     /**
