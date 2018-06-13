@@ -3,11 +3,13 @@ const striptags = require('striptags');
 const fs = require('fs');
 const config = require('./config.json');
 
-// Hardcode admins since Mastodon API doesn't provide such thing...
+// Init
+const client = new Bot(config, [{api_point: "public", events: ["update"]},
+    {api_point: "user", events: ["notification"]}]);
+
 const admins = new Set(config.admins);
 
-const client = new Bot(config, [{api_point: "public", events: ["update"]},
-                                {api_point: "user", events: ["notification"]}]);
+const following = new Set();
 
 const commands = new Map();
 const commandFiles = fs.readdirSync(__dirname + "/commands/");
@@ -17,9 +19,7 @@ for (const file of commandFiles) {
     commands.set(command.name, command)
 }
 
-// Following list
-const following = new Set();
-
+// Start the bot and populate following
 client.start().then(() => {
     client.following_list().then((result) => {
         for(const account of result) {
