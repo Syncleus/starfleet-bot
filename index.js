@@ -49,6 +49,12 @@ client.on('update', (msg) => {
         return;
     }
 
+    // Don't follow other bots
+    if(msg.account.bot === true) {
+        console.log("BOT: " + acct);
+        return;
+    }
+
     // Respect #nobot
     if (striptags(msg.account.note).match(/#nobot/i)) {
         client.mute_user(id);
