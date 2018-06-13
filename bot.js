@@ -7,7 +7,7 @@ class Bot extends EventEmitter {
      * Constructor
      * @param {string} api_url
      * @param {string} access_token
-     * @param {array} listen_on
+     * @param {array} to_listen
      */
     constructor({api_url, access_token}, to_listen) {
         super();
@@ -28,14 +28,13 @@ class Bot extends EventEmitter {
             access_token: this.access_token
         });
 
+
         for(const listen of this.to_listen) {
             this.listeners.set(listen, this.M.stream('streaming/' + listen.api_point));
 
             this.listeners.get(listen).on('message', (msg) => {
-                for(const event of listen.events) {
-                    if (msg.event === event) {
-                        this.emit(msg.event, msg.data)
-                    }
+                if (msg.event === listen.event) {
+                    this.emit(listen.emit_on, msg.data)
                 }
             })
         }

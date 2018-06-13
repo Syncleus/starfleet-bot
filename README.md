@@ -8,7 +8,7 @@ This is a work in progress.
 
 This is a Federation Bot working with the Mastodon API.
 
-This bot listens on the Federated Timeline and follows everyone.
+This bot listens on the Federated Timeline and follows everyone. It also listen reblogs.
 
 This bot respect the #nobot tag.
 
