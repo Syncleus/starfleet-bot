@@ -28,8 +28,7 @@ class Bot extends EventEmitter {
             access_token: this.access_token
         });
 
-
-        for(const listen of this.to_listen) {
+        for (const listen of this.to_listen) {
             this.listeners.set(listen, this.M.stream('streaming/' + listen.api_point));
 
             this.listeners.get(listen).on('message', (msg) => {
@@ -60,14 +59,14 @@ class Bot extends EventEmitter {
             if (next_id === 0) {
                 test = await this.M.get('accounts/' + this.me.id + '/following', {limit: 80});
             } else {
-                test = await this.M.get('accounts/' + this.me.id + '/following', {limit: 80, max_id:next_id});
+                test = await this.M.get('accounts/' + this.me.id + '/following', {limit: 80, max_id: next_id});
             }
 
-            next_id = parseInt(wurl('?max_id' ,test.resp.headers.link.split(",")[0].split(';')[0].slice(1, -1)));
+            next_id = parseInt(wurl('?max_id', test.resp.headers.link.split(",")[0].split(';')[0].slice(1, -1)));
 
             result = result.concat(test.data);
 
-            if(test.data.length < 80) break;
+            if (test.data.length < 80) break;
         }
 
         return result;
@@ -87,14 +86,16 @@ class Bot extends EventEmitter {
             if (next_id === 0) {
                 test = await client.M.get('accounts/' + client.me.id + '/followers', {limit: 80});
             } else {
-                test = await client.M.get('accounts/' + client.me.id + '/followers', {limit: 80, max_id:next_id});
+                test = await client.M.get('accounts/' + client.me.id + '/followers', {limit: 80, max_id: next_id});
             }
 
-            next_id = parseInt(wurl('?max_id' ,test.resp.headers.link.split(",")[0].split(';')[0].slice(1, -1)));
+            // Sorry for this brainfart...
+            // test.resp.headers.link = <https://crazynoisybizarre.town/api/v1/accounts/29127/following?max_id=2808>; rel="next", <https://crazynoisybizarre.town/api/v1/accounts/29127/following?since_id=4024>; rel="prev"
+            next_id = parseInt(wurl('?max_id', test.resp.headers.link.split(",")[0].split(';')[0].slice(1, -1)));
 
             result = result.concat(test.data);
 
-            if(test.data.length < 80) break;
+            if (test.data.length < 80) break;
         }
 
         return result;
@@ -163,7 +164,7 @@ class Bot extends EventEmitter {
      * @param {string} domain
      */
     block_domain(domain) {
-        this.M.post('domain_blocks', { domain });
+        this.M.post('domain_blocks', {domain});
     }
 }
 

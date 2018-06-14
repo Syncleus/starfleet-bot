@@ -1,5 +1,7 @@
 {
   "access_token": "",
   "api_url": "https://botsin.space/api/v1/",
-  "admins": ["admin_username"]
+  "admins": [
+    "admin_username"
+  ]
 }
