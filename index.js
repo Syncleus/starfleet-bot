@@ -92,19 +92,19 @@ function follow_or_not_follow(msg) {
     const acct_parts = acct.split('@');
 
     if (acct_parts.length === 1) {
-        console.log('LOCAL ACCOUNT: ' + acct);
+        //console.log('LOCAL ACCOUNT: ' + acct);
         return;
     }
 
     // Don't follow locked accounts
     if(msg.account.locked === true) {
-        console.log("LOCKED: " + acct);
+        //console.log("LOCKED: " + acct);
         return;
     }
 
     // Don't follow other bots
     if(msg.account.bot === true) {
-        console.log("BOT: " + acct);
+        //console.log("BOT: " + acct);
         return;
     }
 
@@ -117,7 +117,7 @@ function follow_or_not_follow(msg) {
 
     // This will be... not optimal I think.
     if (following.has(acct)) {
-        console.log('ALREADY FOLLOWS: ' + acct);
+        //console.log('ALREADY FOLLOWS: ' + acct);
         return;
     }
 
