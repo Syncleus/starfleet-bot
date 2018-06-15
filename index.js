@@ -20,8 +20,10 @@ for (const file of commandFiles) {
     commands.set(command.name, command)
 }
 
-// Start the bot and populate following
+// Start the bot
 client.start().then(() => {
+
+    // Populate following list
     client.following_list().then((result) => {
         for (const account of result) following.add(account.acct)
 
@@ -59,6 +61,13 @@ function follow_or_not_follow(msg) {
     if (striptags(msg.account.note).match(/#nobot/i)) {
         client.mute_user(id);
         console.log("MUTED #nobot: " + acct);
+
+        // Check if the bot already followed the user
+        // A.K.A. Did the user add a #nobot tag after I follow them ?
+        if (following.has(acct)) {
+            client.unfollow(id);
+            console.log("UNFOLLOW: " + acct)
+        }
         return;
     }
 
